@@ -50,17 +50,8 @@ async function validateImageQuality(imageBuffer) {
     throw new Error('Unable to read image file - it may be corrupted or in an unsupported format');
   }
   
-  // 4. Dimension check
+  // 4. Brightness/Lighting check
   const { width, height } = image.bitmap;
-  if (width < 200 || height < 200) {
-    errors.push('Image resolution too low (minimum 200x200 pixels required)');
-  }
-  
-  if (width > 4096 || height > 4096) {
-    errors.push('Image resolution too high (maximum 4096x4096 pixels)');
-  }
-  
-  // 5. Brightness/Lighting check
   const avgBrightness = calculateAverageBrightness(image);
   console.log(`Image brightness: ${avgBrightness.toFixed(2)}`);
   
